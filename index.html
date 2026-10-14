@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10141c">
+  <title>Telly League vs Sharp Odds</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">ODDS ANALYZER</p>
+        <h1>Telly League <span>vs</span> Sharp</h1>
+        <p class="subhead">Compare Telly prices with normalized Sharp probabilities.</p>
+      </div>
+      <div class="saved-indicator"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div>
+    </header>
+
+    <section class="panel data-panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">HISTORICAL DATA</p><h2>Lookup table (LUT)</h2></div>
+        <span class="count-pill"><strong id="lutCount">0</strong> entries</span>
+      </div>
+      <p class="muted">Your saved entries train the quadratic model used by Compare Odds.</p>
+      <div class="button-row wrap">
+        <button class="button secondary" id="importBtn" type="button">Import CSV</button>
+        <button class="button secondary" id="exportBtn" type="button">Export CSV</button>
+        <button class="button danger-outline" id="clearLutBtn" type="button">Clear LUT</button>
+        <input id="csvFile" type="file" accept=".csv,text/csv" hidden>
+      </div>
+      <p class="small-note">Data is stored in this browser on this device. Use Export CSV / Import CSV to move it between your Windows PC and iPhone.</p>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">NEW MATCHES</p><h2>Enter odds</h2></div>
+        <span class="muted small">Up to 4 matches at once</span>
+      </div>
+      <div class="entry-grid" id="entryGrid"></div>
+      <div class="button-row wrap action-row">
+        <button class="button primary" id="addBtn" type="button">Add to LUT</button>
+        <button class="button accent" id="compareBtn" type="button">Compare Odds</button>
+        <button class="button secondary" id="plotBtn" type="button">Plot Data</button>
+        <button class="button ghost" id="clearInputsBtn" type="button">Clear inputs</button>
+      </div>
+      <div id="notice" class="notice" role="status" hidden></div>
+    </section>
+
+    <section class="panel results-panel" id="resultsPanel">
+      <div class="section-heading"><div><p class="eyebrow">ANALYSIS</p><h2>Comparison results</h2></div></div>
+      <div id="results" class="empty-state">Enter Telly costs and all three Sharp odds, then select Compare Odds.</div>
+    </section>
+
+    <section class="panel chart-panel" id="chartPanel">
+      <div class="section-heading"><div><p class="eyebrow">MODEL VIEW</p><h2>Favorite probability vs Telly cost</h2></div></div>
+      <p class="muted">Blue dots are LUT entries; the dashed line is the degree-2 regression.</p>
+      <div class="chart-wrap"><canvas id="chart" aria-label="Favorite probability regression chart"></canvas></div>
+      <div id="chartMessage" class="empty-state">Add historical entries to the LUT to see the regression plot.</div>
+    </section>
+    <footer>Prototype · Calculations follow the current Python app's approach. Verify results against your Python version before relying on them.</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
